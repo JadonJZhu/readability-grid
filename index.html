@@ -19,11 +19,11 @@
   </div>
 
   <div class="controls">
-    <label for="threshold">Difference needed to count as visible (T): <output id="threshold-value">15</output></label>
+    <label for="threshold">Difference needed to count as clearly visible (T): <output id="threshold-value">15</output></label>
     <input id="threshold" type="range" min="5" max="40" step="1" value="15">
     <button id="clear">Clear samples</button>
     <button id="csv" disabled>Download CSV</button>
-    <span class="legend">Share of effect pixels visible: &#10003; pass 70% or more, ! warn 40% to 69%, &#10005; fail under 40%</span>
+    <span class="legend">Share of effect pixels clearly visible: &#10003; pass 70% or more, ! warn 40% to 69%, &#10005; fail under 40%</span>
   </div>
 
   <p id="message" role="alert"></p>
