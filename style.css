@@ -1,0 +1,187 @@
+:root {
+  --background: #0f1923;
+  --text: #ece8e1;
+  --accent: #ff4655;
+  --pass: #3ddc97;
+  --warn: #f5b841;
+  --line: #3a4550;
+}
+
+* {
+  box-sizing: border-box;
+  border-radius: 0;
+}
+
+body {
+  margin: 0;
+  padding: 12px 16px;
+  background: var(--background);
+  color: var(--text);
+  font: 13px/1.35 system-ui, sans-serif;
+}
+
+h1 {
+  margin: 0;
+  color: var(--accent);
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+h2 {
+  margin: 0 0 4px;
+  font-size: 13px;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  padding: 4px 10px;
+  border: 1px solid var(--text);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.zones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.zone {
+  padding: 10px;
+  border: 1px dashed var(--text);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.legend {
+  margin-left: auto;
+}
+
+#message {
+  margin-top: 6px;
+  color: var(--warn);
+}
+
+#summary {
+  margin: 6px 0 8px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+#grids {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* Each grid scrolls sideways on its own when there are too many columns to fit. */
+#grids section {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  min-width: calc(88px + var(--columns) * 34px);
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+th {
+  overflow: hidden;
+  padding: 2px 4px;
+  font-size: 12px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+th:first-child {
+  width: 88px;
+  text-align: left;
+}
+
+td {
+  padding: 1px;
+}
+
+.cell {
+  width: 100%;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  color: var(--background);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.cell:disabled {
+  background: var(--line);
+  opacity: 1;
+}
+
+.cell[data-verdict="pass"] {
+  background: var(--pass);
+}
+
+.cell[data-verdict="warn"] {
+  background: var(--warn);
+}
+
+.cell[data-verdict="fail"] {
+  background: var(--accent);
+}
+
+.cell:hover,
+.cell:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: -2px;
+}
+
+#detail {
+  margin-top: 12px;
+  padding: 10px;
+  border: 1px solid var(--line);
+}
+
+#detail-title {
+  font-weight: 700;
+}
+
+.detail-images {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+figure {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+}
+
+figcaption {
+  margin-bottom: 4px;
+}
+
+canvas {
+  display: block;
+  max-width: 100%;
+  width: 640px;
+}

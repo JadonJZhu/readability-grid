@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Readability Grid</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Readability Grid</h1>
+    <p>Checks every effect against every background, under normal vision and three kinds of colour blindness. Runs in your browser. Nothing is uploaded.</p>
+  </header>
+
+  <div class="zones">
+    <div class="zone" id="drop-effects"><strong>Effects</strong> Drop PNG or WebP with transparency, or JPG (treated as opaque). Up to 12.</div>
+    <div class="zone" id="drop-backgrounds"><strong>Backgrounds</strong> Drop PNG, JPG or WebP. Up to 12.</div>
+  </div>
+
+  <div class="controls">
+    <label for="threshold">Difference needed to count as visible (T): <output id="threshold-value">15</output></label>
+    <input id="threshold" type="range" min="5" max="40" step="1" value="15">
+    <button id="clear">Clear samples</button>
+    <button id="csv" disabled>Download CSV</button>
+    <span class="legend">Share of effect pixels visible: &#10003; pass 70% or more, ! warn 40% to 69%, &#10005; fail under 40%</span>
+  </div>
+
+  <p id="message" role="alert"></p>
+  <p id="summary" role="status"></p>
+  <div id="grids"></div>
+
+  <section id="detail" hidden>
+    <p id="detail-title"></p>
+    <div class="detail-images">
+      <figure><figcaption>Normal</figcaption><canvas id="detail-normal"></canvas></figure>
+      <figure><figcaption id="detail-vision-label"></figcaption><canvas id="detail-vision"></canvas></figure>
+    </div>
+  </section>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
