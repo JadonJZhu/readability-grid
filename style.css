@@ -185,3 +185,7 @@ canvas {
   max-width: 100%;
   width: 640px;
 }
+
+@media (max-width: 700px) {
+  #grids { grid-template-columns: 1fr; }
+}
