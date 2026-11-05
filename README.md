@@ -40,5 +40,3 @@ Each effect is shrunk so its longest side is at most 128 px, and each background
 - Images are resized with nearest neighbour and composited in linear light, which may not match how a game engine draws the same effect.
 - The sample images are drawn in code, and their colours were tuned so that Venom on Rust Wall shows the problem. They do not come from a real game.
 - A full 12 by 12 grid took about 13 seconds on the machine it was built on. With more than about 8 effects, each grid scrolls sideways and column names are cut off (hover to read the full name).
-
-Built with Claude Code.

@@ -69,7 +69,10 @@ try {
   });
   await finished();
 
-  // "Choose files" adds an effect through the file picker: 5 effects by 4 backgrounds.
+  // The "upload" button opens the file picker, and the picker adds an effect: 5 effects by 4 backgrounds.
+  const chooser = page.waitForEvent('filechooser');
+  await page.click('#drop-effects button');
+  assert.equal((await chooser).isMultiple(), true);
   const png = await page.evaluate(() => {
     const canvas = document.createElement('canvas');
     canvas.width = canvas.height = 8;
@@ -82,17 +85,9 @@ try {
   await finished();
   assert.equal(await page.locator('#grids table').first().locator('.cell').count(), 20);
 
-  // The "i" note shows on keyboard focus and on hover, without moving the grids.
-  const gridsTop = (await page.locator('#grids').boundingBox()).y;
-  assert.equal(await page.locator('#threshold-note').isVisible(), false);
-  await page.focus('#info');
-  assert.equal(await page.locator('#threshold-note').isVisible(), true);
-  assert.equal((await page.locator('#grids').boundingBox()).y, gridsTop);
-  await page.locator('#info').blur();
-  assert.equal(await page.locator('#threshold-note').isVisible(), false);
-  await page.hover('#info');
-  assert.equal(await page.locator('#threshold-note').isVisible(), true);
-  await page.mouse.move(0, 0);
+  // The "How it works" section sits at the bottom of the page.
+  assert.equal(await page.locator('#how h2').textContent(), 'How it works');
+  assert.match(await page.locator('#how p').textContent(), /^Click a tile to see .* a higher T is stricter\.$/);
 
   // Dropping 9 more effects on top of the 5: 7 fit, 2 are refused with a message.
   await page.evaluate(async () => {

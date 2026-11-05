@@ -62,8 +62,17 @@ button:disabled {
   border: 1px dashed var(--text);
 }
 
+/* The upload button reads as a link inside the sentence. */
 .zone button {
-  margin-left: 6px;
+  padding: 0;
+  border: 0;
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.zone button:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
 }
 
 .controls {
@@ -72,37 +81,6 @@ button:disabled {
   align-items: center;
   gap: 12px;
   margin-top: 8px;
-}
-
-/* The note sits over the page below the label, so showing it moves nothing. */
-.controls > span {
-  position: relative;
-}
-
-#info {
-  width: 20px;
-  height: 20px;
-  margin-left: 4px;
-  padding: 0;
-  border-radius: 50%;
-  font-weight: 700;
-}
-
-#threshold-note {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 1;
-  max-width: 440px;
-  padding: 8px 10px;
-  border: 1px solid var(--text);
-  background: var(--background);
-}
-
-#info:hover + #threshold-note,
-#info:focus + #threshold-note {
-  display: block;
 }
 
 .legend {
@@ -219,6 +197,11 @@ canvas {
   display: block;
   max-width: 100%;
   width: 640px;
+}
+
+#how {
+  max-width: 760px;
+  margin-top: 16px;
 }
 
 @media (max-width: 700px) {
