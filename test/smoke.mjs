@@ -69,7 +69,32 @@ try {
   });
   await finished();
 
-  // Dropping 9 more effects on top of the 4 samples: 8 fit, 1 is refused with a message.
+  // "Choose files" adds an effect through the file picker: 5 effects by 4 backgrounds.
+  const png = await page.evaluate(() => {
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = 8;
+    canvas.getContext('2d').fillRect(0, 0, 8, 8);
+    return canvas.toDataURL('image/png').split(',')[1];
+  });
+  const buffer = Buffer.from(png, 'base64');
+  await page.setInputFiles('#drop-effects input', { name: 'chosen.png', mimeType: 'image/png', buffer });
+  await page.waitForFunction(() => document.querySelectorAll('.cell[data-effect="chosen.png"]').length === 16);
+  await finished();
+  assert.equal(await page.locator('#grids table').first().locator('.cell').count(), 20);
+
+  // The "i" note shows on keyboard focus and on hover, without moving the grids.
+  const gridsTop = (await page.locator('#grids').boundingBox()).y;
+  assert.equal(await page.locator('#threshold-note').isVisible(), false);
+  await page.focus('#info');
+  assert.equal(await page.locator('#threshold-note').isVisible(), true);
+  assert.equal((await page.locator('#grids').boundingBox()).y, gridsTop);
+  await page.locator('#info').blur();
+  assert.equal(await page.locator('#threshold-note').isVisible(), false);
+  await page.hover('#info');
+  assert.equal(await page.locator('#threshold-note').isVisible(), true);
+  await page.mouse.move(0, 0);
+
+  // Dropping 9 more effects on top of the 5: 7 fit, 2 are refused with a message.
   await page.evaluate(async () => {
     const canvas = document.createElement('canvas');
     canvas.width = canvas.height = 8;

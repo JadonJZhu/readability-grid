@@ -137,11 +137,11 @@ function downloadCsv() {
 
 function setUpDropZone(id, kind) {
   const zone = $(id);
+  const picker = zone.querySelector('input');
   zone.addEventListener('dragover', (event) => event.preventDefault());
-  zone.addEventListener('drop', (event) => {
-    event.preventDefault();
-    addFiles(kind, [...event.dataTransfer.files]);
-  });
+  zone.addEventListener('drop', (event) => { event.preventDefault(); addFiles(kind, [...event.dataTransfer.files]); });
+  zone.querySelector('button').addEventListener('click', () => picker.click());
+  picker.addEventListener('change', () => { addFiles(kind, [...picker.files]); picker.value = ''; });
 }
 
 setUpDropZone('drop-effects', 'effects');

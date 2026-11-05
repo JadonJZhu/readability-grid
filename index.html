@@ -10,16 +10,26 @@
 <body>
   <header>
     <h1>Readability Grid</h1>
-    <p>Checks every effect against every background, under normal vision and three kinds of colour blindness. Runs in your browser. Nothing is uploaded.</p>
+    <p>Proof-of-concept: color-blindness verification tool for artists to check if visual effects show up against various backgrounds under different types of vision.</p>
   </header>
 
   <div class="zones">
-    <div class="zone" id="drop-effects"><strong>Effects</strong> Drop PNG or WebP with transparency, or JPG (treated as opaque). Up to 12.</div>
-    <div class="zone" id="drop-backgrounds"><strong>Backgrounds</strong> Drop PNG, JPG or WebP. Up to 12.</div>
+    <div class="zone" id="drop-effects"><strong>Effects</strong> Drop PNG or WebP with transparency, or JPG (treated as opaque). Up to 12.
+      <button type="button">Choose files</button>
+      <input type="file" multiple accept="image/png,image/jpeg,image/webp" hidden>
+    </div>
+    <div class="zone" id="drop-backgrounds"><strong>Backgrounds</strong> Drop PNG, JPG or WebP. Up to 12.
+      <button type="button">Choose files</button>
+      <input type="file" multiple accept="image/png,image/jpeg,image/webp" hidden>
+    </div>
   </div>
 
   <div class="controls">
-    <label for="threshold">Difference needed to count as clearly visible (T): <output id="threshold-value">15</output></label>
+    <span>
+      <label for="threshold">Difference needed to count as clearly visible (T): <output id="threshold-value">15</output></label>
+      <button type="button" id="info" aria-label="About difference and the score" aria-describedby="threshold-note">i</button>
+      <p id="threshold-note" role="tooltip">Difference is a standard formula (CIEDE2000) that turns two colors into lightness, red-green and yellow-blue values and measures how far apart they are, adjusted to match how people see; bigger means easier to tell apart. The score is the share of the effect's pixels that differ from the background by at least T, after both are recolored to simulate each kind of vision.</p>
+    </span>
     <input id="threshold" type="range" min="5" max="40" step="1" value="15">
     <button id="clear">Clear samples</button>
     <button id="csv" disabled>Download CSV</button>
